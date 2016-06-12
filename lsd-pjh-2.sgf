@@ -1,5 +1,5 @@
 (;FF[4]CA[UTF-8]AP[GoGui:1.4.9]
-KM[6.5]DT[2016-06-11]
+KM[6.5]PB[Park Junghwan]PW[Lee Sedol]BR[9p]WR[9p]DT[2016-06-11]RU[Ing]
 ;B[qd];W[pp];B[dc];W[cp];B[ce];W[od];B[oc]
 (;W[pd];B[pc];W[qe]
 (;B[nd];W[qc];B[rd];W[qb];B[re];W[pf]
@@ -56,8 +56,23 @@ WBADUK]
 (;W[gg]
 (;B[ge];W[gf]
 (;B[fh]
-(;W[dd];B[ed];W[de];B[ee];W[ic];B[cb];W[bb];B[bc];W[cc];B[bd]
-;W[ce];B[ab];W[ba];B[ca];W[db])
+(;W[dd]
+(;B[ec]
+(;W[gh];B[hi]
+(;W[gi];B[di];W[cc]
+(;B[jc];W[ic];B[ib];W[jd];B[hc];W[id];B[kc];W[lb];B[jb];W[gj]
+;B[hk];W[gk];B[hl];W[gl];B[hm];W[iq];B[hr];W[ir];B[cq];W[hs]
+;B[fr];W[jp];B[pq];W[oo];B[op];W[oo];B[or];W[nr];B[qr];W[os]
+;B[ps];W[pr];B[pi];W[ph];B[or];W[ns];B[rq])
+(;B[hc];W[ib]))
+(;W[ee];B[di];W[gc];B[gb];W[hb];B[fb];W[cc];B[hc];W[ib];B[hd]
+;W[id];B[cb];W[bb];B[db];W[iq];B[hr];W[cq]))
+(;W[cc];B[jc];W[ic];B[ib];W[jd];B[hc];W[id];B[kc];W[lb];B[jb]
+;W[he]))
+(;B[ed];W[de];B[ee];W[ic];B[cb];W[bb];B[bc];W[cc];B[bd];W[ce]
+;B[ab];W[ba];B[ca];W[db];B[aa];W[ec];B[ad];W[gc];B[gh];W[iq]
+;B[hr];W[cq];B[cr];W[br];B[jq];W[jp];B[ir];W[kq];B[ip];W[kr]
+;B[pq];W[oo]))
 (;W[gh];B[hi];W[fi];B[di];W[cc];B[jc];W[ic];B[jd];W[id];B[kc]))
 (;B[cc]))
 (;B[gh];W[fh];B[fg];W[gf];B[eh];W[di];B[ci];W[fi];B[ei];W[gi]
