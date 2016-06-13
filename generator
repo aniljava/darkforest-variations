@@ -2,31 +2,26 @@
 
 import os
 import sys
-import glob
-import csv
-import pure
 import gomill.sgf
 import gomill.boards
 import threading
 import subprocess
 
-
-
-
 VARIATION_DEPTH = 20
-def devnull(stream, process):
-    while process.poll() is None:
-        stream.read(1)
-    print 'DONE'
-
-
 CHARS = 'ABCDEFGHJKLMNOPQRST'
 
 
 def main():
 
+    if len(sys.argv) < 3:
+        print 'USAGE'
+        print 'generator <source_sgf> <dest_sgf>'
+
+    source_sgf = sys.argv[1]
+    dest_sgf = sys.argv[2]
+
     dark_forest = subprocess.Popen(
-        '/root/Desktop/testmm',
+        './darkforest-gtp',         # Shell script that starts the GTP instance
         stdout=subprocess.PIPE,
         stdin=subprocess.PIPE,
         stderr=subprocess.PIPE
@@ -36,13 +31,12 @@ def main():
     reader = dark_forest.stdout
 
     u = threading.Thread(target=devnull, args=(dark_forest.stderr, dark_forest))
-    u.start()
+    # u.start() # Uncomment to use STDERR for debug
 
     writer.write('clear_board\n\n')
     read_response(reader)
 
-    path = sys.argv[1]
-    text = open(path).read()
+    text = open(source_sgf).read()
     source = gomill.sgf.Sgf_game.from_string(text)
     root_node = source.get_root()
 
@@ -54,17 +48,16 @@ def main():
         move = node.get_move()
         color, pos = move
         if pos is None:
-            continue
+            continue  # ROOT NODE
         y, x = pos
         translated = '{}{}'.format(CHARS[x], y + 1)
 
-        
         if move_no < 8:
             command = 'play {} {}\n\n'.format(color, translated)
             writer.write(command)
             read_response(reader, lines=4)
             target.set_move(color, (y, x))  # Extend main sequence
-            
+
         else:
             command = 'genmove {}\n\n'.format(color)
             writer.write(command)
@@ -72,19 +65,18 @@ def main():
             result = result.split('= ')[1]
             y_1, x_1 = alfa_to_num(result)
 
-            if (y,x) == (y_1,x_1):
+            if (y, x) == (y_1, x_1):
                 target.set_move(color, (y, x))  # Is a match, no variation required
             else:
-                
+
                 main = target.new_child()
                 side = target.new_child()
                 main.set_move(color, (y, x))  # Is a match, no variation required
                 side.set_move(color, (y_1, x_1))  # Is a match, no variation required
-                
 
                 # SELF PLAY VARIATION
                 last_color = color
-                for x in range(VARIATION_DEPTH-1):
+                for x in range(VARIATION_DEPTH - 1):
                     if last_color == 'b':
                         last_color = 'w'
                     else:
@@ -97,7 +89,7 @@ def main():
                     y_1, x_1 = alfa_to_num(result)
                     side = side.new_child()
                     side.set_move(last_color, (y_1, x_1))  # Is a match, no variation required
-                
+
                 for x in range(VARIATION_DEPTH):
                     # UNDO THE GENMOVE
                     command = 'undo\n\n'
@@ -108,16 +100,15 @@ def main():
                 command = 'play {} {}\n\n'.format(color, translated)
                 writer.write(command)
                 read_response(reader, lines=4)
-                
+
+        print 'MOVE {} : {}, {}, {}'.format(move_no, color, x, y)
         sgf_text = game.serialise()
-        print sgf_text
         target = game.extend_main_sequence()
-        open('sample.sgf', 'w').write(sgf_text)
+        open(dest_sgf, 'w').write(sgf_text)
         move_no += 1
 
-
-
-
+    global alive
+    alive = False # Stop the std err reader
 
 
 def alfa_to_num(alfa):
@@ -139,4 +130,9 @@ def read_response(reader, lines=4):
     return response.strip()
 
 
+alive = True
+def devnull(stream, process):
+    global alive
+    while process.poll() is None and alive :
+        stream.read(1)
 main()
