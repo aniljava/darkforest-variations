@@ -4,8 +4,11 @@ Script to generate different variations on each move from a SGF file using Faceb
 
 For each move, if it is different from the one suggested by the engine, a variation tree is generated upto depth `VARIATION_DEPTH`, (default 20).
 
+`collections` folder has generated samples
 
 # EXECUTING SCRIPT
+
+Tested on Ubuntu 15.04
 
 - Install torch and darkforestgo, for instructions see, https://github.com/facebookresearch/darkforestGo
 - Edit, `start-nn-service` and `darkforest-gtp` to update the installation folders
@@ -20,3 +23,8 @@ For each move, if it is different from the one suggested by the engine, a variat
 - Generate the branch on demand using comments
 - Copy existing variations from source file to the generated variation, currently only main branch and generated variations are saved on dest.
 - Add metadata such as winrates, possible candidates without variations as a comment
+
+
+# CONVENTIONS
+- File name convention: `<event-detail>--<black-player>-vs-<white-player>--<optional-meta-info>.sgf` Eg: `ing-cup-semifinal-game-2--park-jungwhan-vs-lee-sedol.sgf`
+- Player names from gokifu.com
