@@ -19,3 +19,4 @@ For each move, if it is different from the one suggested by the engine, a variat
 - Increase the number of variations from 1 branch each move to more depending on win rate on alternative branch
 - Generate the branch on demand using comments
 - Copy existing variations from source file to the generated variation, currently only main branch and generated variations are saved on dest.
+- Add metadata such as winrates, possible candidates without variations as a comment
