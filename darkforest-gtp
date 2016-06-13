@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 DARKFOREST_HOME=../darkforestGo
 TORCH_HOME=../torch
-TIME_LIMIT=0 # UNLIMITED
 TIME_LIMIT=1 # DEBUG
+TIME_LIMIT=0 # UNLIMITED
 
 # UPDATE PATH FOR LUA, TORCH
 . $TORCH_HOME/install/bin/torch-activate
