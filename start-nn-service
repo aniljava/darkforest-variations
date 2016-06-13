@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+DARKFOREST_HOME=../darkforestGo
+TORCH_HOME=../torch
+
+# UPDATE PATH FOR LUA, TORCH
+. $TORCH_HOME/install/bin/torch-activate
+
+cd $DARKFOREST_HOME/local_evaluator
+sh cnn_evaluator.sh 1 /data/local/go
+
